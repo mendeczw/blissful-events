@@ -338,6 +338,7 @@
         border: 1px solid rgba(196, 154, 91, 0.25);
         border-radius: 12px;
         display: none;
+        z-index: 1000;
       }
       .nav-links.show {
         display: flex;
@@ -568,11 +569,11 @@
       });
     });
 
-    // cerrar si tocas fuera
+    // cerrar si tocas fuera del menú y fuera del botón
     document.addEventListener("click", (e) => {
-      if (navLinks.classList.contains("show") &&
-          !navLinks.contains(e.target) &&
-          e.target !== hamburger) {
+      const clickEnMenu = navLinks.contains(e.target);
+      const clickEnHamburger = hamburger.contains(e.target);
+      if (navLinks.classList.contains("show") && !clickEnMenu && !clickEnHamburger) {
         navLinks.classList.remove("show");
       }
     });
@@ -584,3 +585,4 @@
   </script>
 </body>
 </html>
+
