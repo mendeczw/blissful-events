@@ -382,7 +382,6 @@
         </div>
       </div>
       <div class="hero-img">
-        <!-- si no tienes imagen, se verá el fondo -->
         <img src="./img/portada-quince.jpg" alt="Decoración de evento elegante" onerror="this.style.display='none'">
       </div>
     </section>
@@ -397,7 +396,7 @@
       </div>
       <p style="max-width: 900px; margin: 0 auto 2.5rem auto; text-align: center;">
         Creamos bodas, quince años, baby showers, eventos corporativos, recepciones íntimas y mesas dulces que cuentan historias.
-        Porque la felicidad está en los pequeños detalles… y nosotros los hacemos brillar. 
+        Porque la felicidad está en los pequeños detalles… y nosotros los hacemos brillar.
       </p>
     </section>
 
@@ -556,15 +555,31 @@
     const hamburger = document.getElementById("hamburger");
     const navLinks = document.getElementById("navLinks");
 
-    hamburger.addEventListener("click", () => {
+    // abrir/cerrar con la hamburguesa
+    hamburger.addEventListener("click", (e) => {
+      e.stopPropagation();
       navLinks.classList.toggle("show");
     });
 
-    // cerrar menú al hacer click en un enlace (móvil)
+    // cerrar al hacer clic en un enlace
     document.querySelectorAll(".nav-links a").forEach(link => {
       link.addEventListener("click", () => {
         navLinks.classList.remove("show");
       });
+    });
+
+    // cerrar si tocas fuera
+    document.addEventListener("click", (e) => {
+      if (navLinks.classList.contains("show") &&
+          !navLinks.contains(e.target) &&
+          e.target !== hamburger) {
+        navLinks.classList.remove("show");
+      }
+    });
+
+    // cerrar al hacer scroll
+    window.addEventListener("scroll", () => {
+      navLinks.classList.remove("show");
     });
   </script>
 </body>
